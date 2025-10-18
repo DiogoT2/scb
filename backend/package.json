@@ -1,0 +1,33 @@
+{
+  "name": "scb-backend",
+  "version": "1.0.0",
+  "description": "Sport Clube Borbense Backend CMS",
+  "main": "index.js",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "keywords": [
+    "strapi",
+    "cms",
+    "sports",
+    "club"
+  ],
+  "author": "Sport Clube Borbense",
+  "license": "MIT",
+  "dependencies": {
+    "@strapi/plugin-users-permissions": "^5.28.0",
+    "@strapi/strapi": "^5.28.0",
+    "better-sqlite3": "^9.6.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.1",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
