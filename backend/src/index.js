@@ -1,22 +1,29 @@
 'use strict';
 
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
+  register(/*{ strapi }*/) {
+    // Register custom logic here
+  },
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
   async bootstrap({ strapi }) {
-    // Bootstrap logic can be added here later
+    // Add a simple healthcheck endpoint
+    strapi.server.routes([
+      {
+        method: 'GET',
+        path: '/health',
+        handler: (ctx) => {
+          ctx.body = {
+            status: 'ok',
+            timestamp: new Date().toISOString(),
+            uptime: process.uptime(),
+            environment: process.env.NODE_ENV || 'development',
+          };
+          ctx.status = 200;
+        },
+        config: {
+          auth: false,
+        },
+      },
+    ]);
   },
 };
