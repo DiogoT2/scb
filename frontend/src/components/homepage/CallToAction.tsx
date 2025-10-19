@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { OptimizedImage } from '@/components/ui/Image';
+// import { OptimizedImage } from '@/components/ui/Image'; // Will be used when background images are added
 
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
@@ -24,7 +24,7 @@ export function CallToAction({
   title,
   description,
   buttonText,
-  buttonLink,
+  // buttonLink, // Will be used when navigation is implemented
   backgroundImage,
 }: CallToActionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);

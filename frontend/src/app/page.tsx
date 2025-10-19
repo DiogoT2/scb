@@ -3,7 +3,7 @@ import { HeroSection } from '@/components/homepage/HeroSection';
 import { NewsGrid } from '@/components/homepage/NewsGrid';
 import { QuickStats } from '@/components/homepage/QuickStats';
 import { CallToAction } from '@/components/homepage/CallToAction';
-import { strapi } from '@/lib/strapi';
+// import { strapi } from '@/lib/strapi'; // Will be used when backend is connected
 
 // Sample data for development
 const sampleStats = [

@@ -30,7 +30,7 @@ export function QuickStats({ stats }: QuickStatsProps) {
 
     const ctx = gsap.context(() => {
       // Counter animation
-      statRefs.current.forEach((statRef, index) => {
+      statRefs.current.forEach((statRef) => {
         const valueElement = statRef.querySelector('.stat-value');
         if (!valueElement) return;
 

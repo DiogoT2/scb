@@ -25,7 +25,7 @@ export function HeroSection({
   subtitle,
   backgroundImage,
   ctaText = 'Join Us',
-  ctaLink = '/join',
+  // ctaLink = '/join', // Will be used when navigation is implemented
 }: HeroSectionProps) {
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
