@@ -23,8 +23,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ...props 
   }, ref) => {
     const { 
-      onDrag, onDragEnd, onDragStart, onDragEnter, onDragExit, onDragLeave, onDragOver, onDrop,
-      onAnimationStart, onAnimationEnd, onAnimationIteration,
+      onDrag: _onDrag, onDragEnd: _onDragEnd, onDragStart: _onDragStart, onDragEnter: _onDragEnter, onDragExit: _onDragExit, onDragLeave: _onDragLeave, onDragOver: _onDragOver, onDrop: _onDrop,
+      onAnimationStart: _onAnimationStart, onAnimationEnd: _onAnimationEnd, onAnimationIteration: _onAnimationIteration,
       ...restProps 
     } = props;
     const baseClasses = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';

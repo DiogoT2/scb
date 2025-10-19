@@ -13,8 +13,8 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'default', hover = false, animated = true, children, ...props }, ref) => {
     const { 
-      onDrag, onDragEnd, onDragStart, onDragEnter, onDragExit, onDragLeave, onDragOver, onDrop,
-      onAnimationStart, onAnimationEnd, onAnimationIteration,
+      onDrag: _onDrag, onDragEnd: _onDragEnd, onDragStart: _onDragStart, onDragEnter: _onDragEnter, onDragExit: _onDragExit, onDragLeave: _onDragLeave, onDragOver: _onDragOver, onDrop: _onDrop,
+      onAnimationStart: _onAnimationStart, onAnimationEnd: _onAnimationEnd, onAnimationIteration: _onAnimationIteration,
       ...restProps 
     } = props;
     const baseClasses = 'rounded-xl transition-all duration-200';
