@@ -1,12 +1,8 @@
 'use strict';
 
 module.exports = {
-  register(/*{ strapi }*/) {
-    // Register custom logic here
-  },
-
-  async bootstrap({ strapi }) {
-    // Add a simple healthcheck endpoint
+  register({ strapi }) {
+    // Register the healthcheck route early in the process
     strapi.server.routes([
       {
         method: 'GET',
@@ -17,6 +13,7 @@ module.exports = {
             timestamp: new Date().toISOString(),
             uptime: process.uptime(),
             environment: process.env.NODE_ENV || 'development',
+            strapi: 'ready'
           };
           ctx.status = 200;
         },
@@ -25,5 +22,10 @@ module.exports = {
         },
       },
     ]);
+  },
+
+  async bootstrap({ strapi }) {
+    // Bootstrap logic can be added here later
+    console.log('Strapi bootstrap completed');
   },
 };

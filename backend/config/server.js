@@ -7,4 +7,9 @@ module.exports = ({ env }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  // Railway-specific configuration
+  proxy: env.bool('IS_PROXIED', true),
+  cron: {
+    enabled: false,
+  },
 });
