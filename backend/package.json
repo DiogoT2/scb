@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "develop": "strapi develop",
-    "start": "node start.js",
-    "start:strapi": "strapi start",
+    "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
