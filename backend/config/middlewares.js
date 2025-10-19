@@ -9,4 +9,9 @@ module.exports = [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  // Custom healthcheck middleware
+  {
+    name: 'global::healthcheck',
+    config: {},
+  },
 ];
