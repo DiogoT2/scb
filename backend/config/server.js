@@ -12,4 +12,10 @@ module.exports = ({ env }) => ({
   cron: {
     enabled: false,
   },
+  // Disable admin panel temporarily for debugging
+  admin: {
+    auth: {
+      secret: env('ADMIN_JWT_SECRET'),
+    },
+  },
 });
