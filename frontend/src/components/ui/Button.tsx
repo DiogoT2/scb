@@ -22,12 +22,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     disabled,
     ...props 
   }, ref) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { 
       onDrag, onDragEnd, onDragStart, onDragEnter, onDragExit, onDragLeave, onDragOver, onDrop,
       onAnimationStart, onAnimationEnd, onAnimationIteration,
       ...restProps 
     } = props;
+    
+    // Suppress unused variable warnings for destructured props
+    void onDrag; void onDragEnd; void onDragStart; void onDragEnter; void onDragExit; void onDragLeave; void onDragOver; void onDrop;
+    void onAnimationStart; void onAnimationEnd; void onAnimationIteration;
     const baseClasses = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
     
     const variants = {

@@ -25,7 +25,7 @@ class StrapiClient {
   }
 
   // Generic method to fetch data
-  private async fetch<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
+  private async fetch<T>(endpoint: string, params?: Record<string, unknown>): Promise<T> {
     try {
       const response = await this.client.get(endpoint, { params });
       return response.data as T;
@@ -36,10 +36,11 @@ class StrapiClient {
   }
 
   // News methods (placeholder - will work when content types are added)
-  async getNews(params?: {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getNews(_params?: {
     populate?: string;
     sort?: string;
-    filters?: Record<string, any>;
+    filters?: Record<string, unknown>;
     pagination?: { page: number; pageSize: number };
   }): Promise<StrapiResponse<News[]>> {
     // Return empty data for now - will be populated when content types are added
@@ -49,10 +50,11 @@ class StrapiClient {
     });
   }
 
-  async getNewsBySlug(slug: string): Promise<StrapiResponse<News>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getNewsBySlug(_slug: string): Promise<StrapiResponse<News>> {
     // Return empty data for now
     return Promise.resolve({
-      data: null as any,
+      data: null as unknown as News,
       meta: {}
     });
   }
@@ -66,10 +68,11 @@ class StrapiClient {
   }
 
   // Player methods (placeholder)
-  async getPlayers(params?: {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getPlayers(_params?: {
     populate?: string;
     sort?: string;
-    filters?: Record<string, any>;
+    filters?: Record<string, unknown>;
   }): Promise<StrapiResponse<Player[]>> {
     return Promise.resolve({
       data: [],
@@ -77,9 +80,10 @@ class StrapiClient {
     });
   }
 
-  async getPlayerById(id: number): Promise<StrapiResponse<Player>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getPlayerById(_id: number): Promise<StrapiResponse<Player>> {
     return Promise.resolve({
-      data: null as any,
+      data: null as unknown as Player,
       meta: {}
     });
   }
@@ -92,10 +96,11 @@ class StrapiClient {
   }
 
   // Match methods (placeholder)
-  async getMatches(params?: {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getMatches(_params?: {
     populate?: string;
     sort?: string;
-    filters?: Record<string, any>;
+    filters?: Record<string, unknown>;
   }): Promise<StrapiResponse<Match[]>> {
     return Promise.resolve({
       data: [],
@@ -118,7 +123,8 @@ class StrapiClient {
   }
 
   // History methods (placeholder)
-  async getHistory(params?: {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getHistory(_params?: {
     populate?: string;
     sort?: string;
   }): Promise<StrapiResponse<History[]>> {
@@ -129,10 +135,11 @@ class StrapiClient {
   }
 
   // Gallery methods (placeholder)
-  async getGalleries(params?: {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getGalleries(_params?: {
     populate?: string;
     sort?: string;
-    filters?: Record<string, any>;
+    filters?: Record<string, unknown>;
   }): Promise<StrapiResponse<Gallery[]>> {
     return Promise.resolve({
       data: [],
@@ -150,15 +157,17 @@ class StrapiClient {
   // Homepage methods (placeholder)
   async getHomepage(): Promise<StrapiResponse<Homepage>> {
     return Promise.resolve({
-      data: null as any,
+      data: null as unknown as Homepage,
       meta: {}
     });
   }
 
   // Utility method to get media URL
-  getMediaUrl(media: any): string {
-    if (!media?.data?.attributes?.url) return '';
-    return `${this.baseURL}${media.data.attributes.url}`;
+  getMediaUrl(media: unknown): string {
+    if (!media || typeof media !== 'object' || !('data' in media)) return '';
+    const mediaData = media as { data?: { attributes?: { url?: string } } };
+    if (!mediaData.data?.attributes?.url) return '';
+    return `${this.baseURL}${mediaData.data.attributes.url}`;
   }
 
   // Utility method to get formatted date

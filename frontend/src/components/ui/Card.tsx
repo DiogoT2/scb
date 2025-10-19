@@ -12,12 +12,15 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = 'default', hover = false, animated = true, children, ...props }, ref) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { 
       onDrag, onDragEnd, onDragStart, onDragEnter, onDragExit, onDragLeave, onDragOver, onDrop,
       onAnimationStart, onAnimationEnd, onAnimationIteration,
       ...restProps 
     } = props;
+    
+    // Suppress unused variable warnings for destructured props
+    void onDrag; void onDragEnd; void onDragStart; void onDragEnter; void onDragExit; void onDragLeave; void onDragOver; void onDrop;
+    void onAnimationStart; void onAnimationEnd; void onAnimationIteration;
     const baseClasses = 'rounded-xl transition-all duration-200';
     
     const variants = {

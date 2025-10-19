@@ -13,8 +13,8 @@ export interface StrapiResponse<T> {
 
 export interface StrapiEntity {
   id: number;
-  attributes: any;
-  meta?: any;
+  attributes: Record<string, unknown>;
+  meta?: Record<string, unknown>;
 }
 
 export interface StrapiMedia {
@@ -34,7 +34,7 @@ export interface StrapiMedia {
     url: string;
     previewUrl?: string;
     provider: string;
-    provider_metadata?: any;
+    provider_metadata?: Record<string, unknown>;
     createdAt: string;
     updatedAt: string;
   };
