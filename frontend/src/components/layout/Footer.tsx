@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const footerLinks = {
@@ -39,9 +40,11 @@ export function Footer() {
           {/* Club Info */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <img
+              <Image
                 src="/logo.svg"
                 alt="Sport Clube Borbense"
+                width={48}
+                height={48}
                 className="h-12 w-12"
               />
               <div>

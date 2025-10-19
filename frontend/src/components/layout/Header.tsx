@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { cn } from '@/lib/utils';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -29,9 +29,11 @@ export function Header() {
               whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              <img
+              <Image
                 src="/logo.svg"
                 alt="Sport Clube Borbense"
+                width={40}
+                height={40}
                 className="h-10 w-10"
               />
             </motion.div>
