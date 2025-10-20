@@ -16,6 +16,21 @@ module.exports = {
         config: { auth: false },
       },
     ]);
+
+    // Add middleware to handle secure cookies for Railway
+    strapi.server.use(async (ctx, next) => {
+      // Force secure cookies to false for Railway
+      if (ctx.cookies) {
+        const originalSet = ctx.cookies.set;
+        ctx.cookies.set = function(name, value, options = {}) {
+          // Override secure option for Railway
+          options.secure = false;
+          options.sameSite = 'lax';
+          return originalSet.call(this, name, value, options);
+        };
+      }
+      await next();
+    });
   },
 
   async bootstrap({ strapi }) {

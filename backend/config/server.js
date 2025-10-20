@@ -19,6 +19,12 @@ module.exports = ({ env }) => ({
     // Fix for Railway HTTPS cookies
     url: env('ADMIN_URL', '/admin'),
     serveAdminPanel: true,
+    // Disable secure cookies for Railway
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      sameSite: 'lax',
+    },
   },
   // Fix secure cookies for Railway
   url: env('PUBLIC_URL', 'https://scb-production.up.railway.app'),
