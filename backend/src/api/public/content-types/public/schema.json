@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publics",
+  "info": {
+    "singularName": "public",
+    "pluralName": "publics",
+    "displayName": "Public",
+    "description": "Public API endpoints"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

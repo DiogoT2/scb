@@ -41,13 +41,7 @@ class StrapiClient {
           filters?: Record<string, unknown>;
           pagination?: { page: number; pageSize: number };
         }): Promise<StrapiResponse<News[]>> {
-          return this.fetch<StrapiResponse<News[]>>('/articles', {
-            populate: params?.populate || 'featuredImage',
-            sort: params?.sort || 'publishedAt:desc',
-            ...params?.filters,
-            'pagination[page]': params?.pagination?.page || 1,
-            'pagination[pageSize]': params?.pagination?.pageSize || 10,
-          });
+          return this.fetch<StrapiResponse<News[]>>('/public/articles');
         }
 
         async getNewsBySlug(slug: string): Promise<StrapiResponse<News>> {
@@ -58,12 +52,7 @@ class StrapiClient {
         }
 
   async getFeaturedNews(): Promise<StrapiResponse<News[]>> {
-    return this.fetch<StrapiResponse<News[]>>('/articles', {
-      'filters[featured][$eq]': true,
-      populate: 'featuredImage',
-      sort: 'publishedAt:desc',
-      'pagination[pageSize]': 3,
-    });
+    return this.fetch<StrapiResponse<News[]>>('/public/articles');
   }
 
   // Player methods (now working with real Strapi data)
@@ -73,13 +62,7 @@ class StrapiClient {
     filters?: Record<string, unknown>;
     pagination?: { page: number; pageSize: number };
   }): Promise<StrapiResponse<Player[]>> {
-    return this.fetch<StrapiResponse<Player[]>>('/players', {
-      populate: params?.populate || 'photo',
-      sort: params?.sort || 'jerseyNumber:asc',
-      ...params?.filters,
-      'pagination[page]': params?.pagination?.page || 1,
-      'pagination[pageSize]': params?.pagination?.pageSize || 10,
-    });
+    return this.fetch<StrapiResponse<Player[]>>('/public/players');
   }
 
   async getPlayerById(id: number): Promise<StrapiResponse<Player>> {
@@ -89,11 +72,7 @@ class StrapiClient {
   }
 
   async getActivePlayers(): Promise<StrapiResponse<Player[]>> {
-    return this.fetch<StrapiResponse<Player[]>>('/players', {
-      populate: 'photo',
-      sort: 'jerseyNumber:asc',
-      'pagination[pageSize]': 20,
-    });
+    return this.fetch<StrapiResponse<Player[]>>('/public/players');
   }
 
   // Match methods (now working with real Strapi data)
@@ -103,29 +82,15 @@ class StrapiClient {
     filters?: Record<string, unknown>;
     pagination?: { page: number; pageSize: number };
   }): Promise<StrapiResponse<Match[]>> {
-    return this.fetch<StrapiResponse<Match[]>>('/matches', {
-      populate: params?.populate || '',
-      sort: params?.sort || 'matchDate:desc',
-      ...params?.filters,
-      'pagination[page]': params?.pagination?.page || 1,
-      'pagination[pageSize]': params?.pagination?.pageSize || 10,
-    });
+    return this.fetch<StrapiResponse<Match[]>>('/public/matches');
   }
 
   async getUpcomingMatches(): Promise<StrapiResponse<Match[]>> {
-    return this.fetch<StrapiResponse<Match[]>>('/matches', {
-      'filters[status][$eq]': 'upcoming',
-      sort: 'matchDate:asc',
-      'pagination[pageSize]': 5,
-    });
+    return this.fetch<StrapiResponse<Match[]>>('/public/matches');
   }
 
   async getRecentMatches(): Promise<StrapiResponse<Match[]>> {
-    return this.fetch<StrapiResponse<Match[]>>('/matches', {
-      'filters[status][$eq]': 'finished',
-      sort: 'matchDate:desc',
-      'pagination[pageSize]': 5,
-    });
+    return this.fetch<StrapiResponse<Match[]>>('/public/matches');
   }
 
   // History methods (placeholder)
