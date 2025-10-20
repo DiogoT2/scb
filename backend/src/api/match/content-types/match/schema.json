@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "matches",
+  "info": {
+    "singularName": "match",
+    "pluralName": "matches",
+    "displayName": "Match",
+    "description": "Football matches and fixtures"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "homeTeam": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "awayTeam": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "matchDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "venue": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "competition": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "result": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["upcoming", "live", "finished"],
+      "required": true,
+      "default": "upcoming"
+    },
+    "homeScore": {
+      "type": "integer",
+      "min": 0
+    },
+    "awayScore": {
+      "type": "integer",
+      "min": 0
+    },
+    "attendance": {
+      "type": "integer",
+      "min": 0
+    },
+    "referee": {
+      "type": "string",
+      "maxLength": 100
+    }
+  }
+}

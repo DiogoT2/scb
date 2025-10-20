@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "players",
+  "info": {
+    "singularName": "player",
+    "pluralName": "players",
+    "displayName": "Player",
+    "description": "Team players information"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "position": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "jerseyNumber": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "max": 99
+    },
+    "bio": {
+      "type": "richtext"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "dateOfBirth": {
+      "type": "date"
+    },
+    "nationality": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "height": {
+      "type": "decimal"
+    },
+    "weight": {
+      "type": "decimal"
+    },
+    "joinedDate": {
+      "type": "date"
+    }
+  }
+}
