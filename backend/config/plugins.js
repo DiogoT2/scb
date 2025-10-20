@@ -18,4 +18,12 @@ module.exports = {
       },
     },
   },
+  // Fix for Railway HTTPS cookies
+  'admin': {
+    config: {
+      auth: {
+        secret: process.env.ADMIN_JWT_SECRET || 'default-admin-secret-key',
+      },
+    },
+  },
 };

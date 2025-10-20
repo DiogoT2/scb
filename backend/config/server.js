@@ -16,5 +16,10 @@ module.exports = ({ env }) => ({
     auth: {
       secret: env('ADMIN_JWT_SECRET', 'default-admin-secret-key'),
     },
+    // Fix for Railway HTTPS cookies
+    url: env('ADMIN_URL', '/admin'),
+    serveAdminPanel: true,
   },
+  // Fix secure cookies for Railway
+  url: env('PUBLIC_URL', 'https://scb-production.up.railway.app'),
 });
