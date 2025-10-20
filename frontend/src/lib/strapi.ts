@@ -72,11 +72,14 @@ class StrapiClient {
     populate?: string;
     sort?: string;
     filters?: Record<string, unknown>;
+    pagination?: { page: number; pageSize: number };
   }): Promise<StrapiResponse<Player[]>> {
     return this.fetch<StrapiResponse<Player[]>>('/players', {
       populate: params?.populate || 'photo',
       sort: params?.sort || 'jerseyNumber:asc',
       ...params?.filters,
+      'pagination[page]': params?.pagination?.page || 1,
+      'pagination[pageSize]': params?.pagination?.pageSize || 10,
     });
   }
 
@@ -99,11 +102,14 @@ class StrapiClient {
     populate?: string;
     sort?: string;
     filters?: Record<string, unknown>;
+    pagination?: { page: number; pageSize: number };
   }): Promise<StrapiResponse<Match[]>> {
     return this.fetch<StrapiResponse<Match[]>>('/matches', {
       populate: params?.populate || '',
       sort: params?.sort || 'matchDate:desc',
       ...params?.filters,
+      'pagination[page]': params?.pagination?.page || 1,
+      'pagination[pageSize]': params?.pagination?.pageSize || 10,
     });
   }
 
