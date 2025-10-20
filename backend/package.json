@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "develop": "strapi develop",
-    "start": "strapi start",
+    "start": "node scripts/setup-uploads.js && strapi start",
     "build": "strapi build",
     "strapi": "strapi"
   },
