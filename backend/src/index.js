@@ -40,6 +40,39 @@ module.exports = {
       fs.mkdirSync(uploadsDir, { recursive: true });
       console.log('Created uploads directory:', uploadsDir);
     }
+
+    // Configure API permissions for public access
+    try {
+      const pluginStore = strapi.store({ type: 'plugin', name: 'users-permissions' });
+      const publicRole = await strapi.query('plugin::users-permissions.role').findOne({
+        where: { type: 'public' },
+      });
+
+      if (publicRole) {
+        // Set permissions for Articles
+        await pluginStore.set({ key: 'advanced', value: { ...publicRole.permissions } });
+        
+        // Enable find and findOne for all content types
+        const contentTypes = ['article', 'player', 'match'];
+        
+        for (const contentType of contentTypes) {
+          if (!publicRole.permissions[`api::${contentType}.${contentType}`]) {
+            publicRole.permissions[`api::${contentType}.${contentType}`] = {};
+          }
+          publicRole.permissions[`api::${contentType}.${contentType}`].find = { enabled: true };
+          publicRole.permissions[`api::${contentType}.${contentType}`].findOne = { enabled: true };
+        }
+
+        await strapi.query('plugin::users-permissions.role').update({
+          where: { id: publicRole.id },
+          data: { permissions: publicRole.permissions },
+        });
+
+        console.log('✅ API permissions configured for public access');
+      }
+    } catch (error) {
+      console.log('⚠️ Could not configure API permissions automatically:', error.message);
+    }
     
     console.log('Strapi bootstrap completed');
     console.log('Healthcheck endpoint available at: /');

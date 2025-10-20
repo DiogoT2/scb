@@ -19,7 +19,6 @@ class StrapiClient {
       baseURL: `${this.baseURL}/api`,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_STRAPI_TOKEN}`,
       },
     });
   }
