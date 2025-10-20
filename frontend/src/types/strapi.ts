@@ -73,16 +73,15 @@ export interface Player {
   id: number;
   attributes: {
     name: string;
-    position: 'goalkeeper' | 'defender' | 'midfielder' | 'forward';
-    jerseyNumber?: number;
-    age?: number;
-    nationality?: string;
+    position: string;
+    jerseyNumber: number;
     bio?: string;
     photo?: StrapiResponse<StrapiMedia>;
-    stats?: PlayerStats;
-    contractStart?: string;
-    contractEnd?: string;
-    isActive: boolean;
+    dateOfBirth?: string;
+    nationality?: string;
+    height?: number;
+    weight?: number;
+    joinedDate?: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
@@ -101,16 +100,15 @@ export interface PlayerStats {
 export interface Match {
   id: number;
   attributes: {
-    opponent: string;
-    opponentLogo?: StrapiResponse<StrapiMedia>;
+    homeTeam: string;
+    awayTeam: string;
     matchDate: string;
-    venue: 'home' | 'away';
+    venue?: string;
     competition: string;
+    result?: string;
+    status: 'upcoming' | 'live' | 'finished';
     homeScore?: number;
     awayScore?: number;
-    status: 'scheduled' | 'live' | 'finished' | 'postponed' | 'cancelled';
-    highlights?: string;
-    matchReport?: string;
     attendance?: number;
     referee?: string;
     createdAt: string;
