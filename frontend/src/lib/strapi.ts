@@ -35,90 +35,91 @@ class StrapiClient {
     }
   }
 
-  // News methods (placeholder - will work when content types are added)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getNews(_params?: {
-    populate?: string;
-    sort?: string;
-    filters?: Record<string, unknown>;
-    pagination?: { page: number; pageSize: number };
-  }): Promise<StrapiResponse<News[]>> {
-    // Return empty data for now - will be populated when content types are added
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 } }
-    });
-  }
+        // News methods (now working with real Strapi data)
+        async getNews(params?: {
+          populate?: string;
+          sort?: string;
+          filters?: Record<string, unknown>;
+          pagination?: { page: number; pageSize: number };
+        }): Promise<StrapiResponse<News[]>> {
+          return this.fetch<StrapiResponse<News[]>>('/articles', {
+            populate: params?.populate || 'featuredImage',
+            sort: params?.sort || 'publishedAt:desc',
+            ...params?.filters,
+            'pagination[page]': params?.pagination?.page || 1,
+            'pagination[pageSize]': params?.pagination?.pageSize || 10,
+          });
+        }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getNewsBySlug(_slug: string): Promise<StrapiResponse<News>> {
-    // Return empty data for now
-    return Promise.resolve({
-      data: null as unknown as News,
-      meta: {}
-    });
-  }
+        async getNewsBySlug(slug: string): Promise<StrapiResponse<News>> {
+          return this.fetch<StrapiResponse<News>>('/articles', {
+            'filters[slug][$eq]': slug,
+            populate: 'featuredImage',
+          });
+        }
 
   async getFeaturedNews(): Promise<StrapiResponse<News[]>> {
-    // Return empty data for now
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 3, pageCount: 0, total: 0 } }
+    return this.fetch<StrapiResponse<News[]>>('/articles', {
+      'filters[featured][$eq]': true,
+      populate: 'featuredImage',
+      sort: 'publishedAt:desc',
+      'pagination[pageSize]': 3,
     });
   }
 
-  // Player methods (placeholder)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getPlayers(_params?: {
+  // Player methods (now working with real Strapi data)
+  async getPlayers(params?: {
     populate?: string;
     sort?: string;
     filters?: Record<string, unknown>;
   }): Promise<StrapiResponse<Player[]>> {
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 } }
+    return this.fetch<StrapiResponse<Player[]>>('/players', {
+      populate: params?.populate || 'photo',
+      sort: params?.sort || 'jerseyNumber:asc',
+      ...params?.filters,
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getPlayerById(_id: number): Promise<StrapiResponse<Player>> {
-    return Promise.resolve({
-      data: null as unknown as Player,
-      meta: {}
+  async getPlayerById(id: number): Promise<StrapiResponse<Player>> {
+    return this.fetch<StrapiResponse<Player>>(`/players/${id}`, {
+      populate: 'photo',
     });
   }
 
   async getActivePlayers(): Promise<StrapiResponse<Player[]>> {
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 } }
+    return this.fetch<StrapiResponse<Player[]>>('/players', {
+      populate: 'photo',
+      sort: 'jerseyNumber:asc',
+      'pagination[pageSize]': 20,
     });
   }
 
-  // Match methods (placeholder)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getMatches(_params?: {
+  // Match methods (now working with real Strapi data)
+  async getMatches(params?: {
     populate?: string;
     sort?: string;
     filters?: Record<string, unknown>;
   }): Promise<StrapiResponse<Match[]>> {
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 } }
+    return this.fetch<StrapiResponse<Match[]>>('/matches', {
+      populate: params?.populate || '',
+      sort: params?.sort || 'matchDate:desc',
+      ...params?.filters,
     });
   }
 
   async getUpcomingMatches(): Promise<StrapiResponse<Match[]>> {
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 5, pageCount: 0, total: 0 } }
+    return this.fetch<StrapiResponse<Match[]>>('/matches', {
+      'filters[status][$eq]': 'upcoming',
+      sort: 'matchDate:asc',
+      'pagination[pageSize]': 5,
     });
   }
 
   async getRecentMatches(): Promise<StrapiResponse<Match[]>> {
-    return Promise.resolve({
-      data: [],
-      meta: { pagination: { page: 1, pageSize: 5, pageCount: 0, total: 0 } }
+    return this.fetch<StrapiResponse<Match[]>>('/matches', {
+      'filters[status][$eq]': 'finished',
+      sort: 'matchDate:desc',
+      'pagination[pageSize]': 5,
     });
   }
 

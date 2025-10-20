@@ -3,7 +3,7 @@ import { HeroSection } from '@/components/homepage/HeroSection';
 import { NewsGrid } from '@/components/homepage/NewsGrid';
 import { QuickStats } from '@/components/homepage/QuickStats';
 import { CallToAction } from '@/components/homepage/CallToAction';
-// import { strapi } from '@/lib/strapi'; // Will be used when backend is connected
+import { strapi } from '@/lib/strapi';
 
 // Sample data for development
 const sampleStats = [
@@ -14,9 +14,22 @@ const sampleStats = [
 ];
 
 export default async function Home() {
-  // In a real app, you would fetch this data from Strapi
-  // const homepage = await strapi.getHomepage();
-  // const news = await strapi.getFeaturedNews();
+  // Fetch real data from Strapi
+  const [featuredNewsResponse, playersResponse] = await Promise.all([
+    strapi.getFeaturedNews().catch(() => ({ data: [], meta: { pagination: { page: 1, pageSize: 3, pageCount: 0, total: 0 } } })),
+    strapi.getActivePlayers().catch(() => ({ data: [], meta: { pagination: { page: 1, pageSize: 20, pageCount: 0, total: 0 } } })),
+  ]);
+
+  const featuredNews = featuredNewsResponse.data || [];
+  const players = playersResponse.data || [];
+
+  // Update stats with real data
+  const stats = [
+    { label: 'Years of History', value: '70+', icon: 'calendar' },
+    { label: 'Trophies Won', value: '15', icon: 'trophy' },
+    { label: 'Active Players', value: players.length.toString(), icon: 'users' },
+    { label: 'Community Members', value: '500+', icon: 'heart' },
+  ];
 
   return (
     <Layout>
@@ -27,10 +40,10 @@ export default async function Home() {
         ctaLink="/join"
       />
       
-      <QuickStats stats={sampleStats} />
+      <QuickStats stats={stats} />
       
       <NewsGrid
-        news={[]} // Empty for now - will be populated when content types are added
+        news={featuredNews}
         title="Latest News"
         showAll={false}
       />
