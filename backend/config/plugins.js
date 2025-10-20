@@ -4,14 +4,13 @@ module.exports = {
       jwt: {
         expiresIn: '7d',
       },
+      jwtSecret: process.env.JWT_SECRET || 'your-jwt-secret-key-here',
     },
   },
   upload: {
     config: {
       provider: 'local',
-      providerOptions: {
-        sizeLimit: 100000000, // 100MB
-      },
+      sizeLimit: 100000000, // 100MB - moved from providerOptions
       actionOptions: {
         upload: {},
         uploadStream: {},
