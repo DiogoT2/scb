@@ -107,12 +107,12 @@ export function NewsGrid({ news, title = 'Latest News', showAll = false }: NewsG
               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
               <Card variant="elevated" hover className="h-full">
-                <Link href={`/news/${article.attributes.slug}`}>
+                <Link href={`/news/${article.attributes?.slug || 'article'}`}>
                   <div className="relative h-48 overflow-hidden rounded-t-xl">
                     {article.attributes.featuredImage?.data ? (
                       <OptimizedImage
                         src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${article.attributes.featuredImage.data.attributes.url}`}
-                        alt={article.attributes.title}
+                        alt={article.attributes?.title || 'Article image'}
                         fill
                         className="object-cover transition-transform duration-300 hover:scale-105"
                       />
@@ -125,10 +125,10 @@ export function NewsGrid({ news, title = 'Latest News', showAll = false }: NewsG
                     )}
                     <div className="absolute top-4 left-4">
                       <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium capitalize">
-                        {article.attributes.category}
+                        {article.attributes?.category || 'general'}
                       </span>
                     </div>
-                    {article.attributes.featured && (
+                    {article.attributes?.featured && (
                       <div className="absolute top-4 right-4">
                         <span className="bg-accent text-white px-3 py-1 rounded-full text-sm font-medium">
                           Featured
@@ -140,25 +140,25 @@ export function NewsGrid({ news, title = 'Latest News', showAll = false }: NewsG
 
                 <CardHeader>
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-2">
-                    <span>{formatDate(article.attributes.publishedAt)}</span>
-                    <span>By {article.attributes.author}</span>
+                    <span>{formatDate(article.attributes?.publishedAt || new Date().toISOString())}</span>
+                    <span>By {article.attributes?.author || 'Unknown'}</span>
                   </div>
                   <CardTitle className="text-xl leading-tight">
                     <Link
-                      href={`/news/${article.attributes.slug}`}
+                      href={`/news/${article.attributes?.slug || 'article'}`}
                       className="hover:text-primary transition-colors duration-200"
                     >
-                      {article.attributes.title}
+                      {article.attributes?.title || 'Untitled'}
                     </Link>
                   </CardTitle>
                 </CardHeader>
 
                 <CardContent>
                   <p className="text-gray-600 leading-relaxed">
-                    {article.attributes.excerpt || truncateText(article.attributes.content.replace(/<[^>]*>/g, ''), 120)}
+                    {article.attributes?.excerpt || truncateText((article.attributes?.content || '').replace(/<[^>]*>/g, ''), 120)}
                   </p>
                   <Link
-                    href={`/news/${article.attributes.slug}`}
+                    href={`/news/${article.attributes?.slug || 'article'}`}
                     className="inline-flex items-center text-primary hover:text-primary-600 font-medium mt-4 transition-colors duration-200"
                   >
                     Read More
